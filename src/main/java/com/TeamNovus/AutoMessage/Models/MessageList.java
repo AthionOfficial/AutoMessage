@@ -151,10 +151,9 @@ public class MessageList {
 					try {
 						String msge = colourCodeToJson(m.substring(0, m.length() - 1) + ",{\"text\":\" \",\"color\":\"gold\"}]");
 						AutoMessage.plugin.getLogger().info(msge);
-						Object parsedMessage = IChatBaseComponent.ChatSerializer.a(msge);
 
-						PacketPlayOutChat msg = new PacketPlayOutChat(ChatSerializer.a(parsedMessage.toString()));
-						((CraftPlayer) to).getHandle().playerConnection.sendPacket(msg);
+						PacketPlayOutChat msg = new PacketPlayOutChat(ChatSerializer.a(msge));
+						((CraftPlayer) ((Player) to)).getHandle().playerConnection.sendPacket(msg);
 					} catch (Exception ignore) {
 						ignore.printStackTrace();
 					}
