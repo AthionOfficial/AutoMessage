@@ -25,11 +25,8 @@ public class MessageList {
 	private List<Message> messages = new LinkedList<Message>();
 
 	private transient int currentIndex = 0;
-
-	private AutoMessage plugin;
 	
-	public MessageList(AutoMessage plugin) {
-		this.plugin = plugin;
+	public MessageList() {
 		messages.add(new Message("First message in the list!"));
 		messages.add(new Message("&aSecond message in the list with formatters!"));
 		messages.add(new Message("&bThird message in the list with formatters and a \nnew line!"));
@@ -204,7 +201,7 @@ public class MessageList {
 					try {
 						Object parsedMessage = IChatBaseComponent.ChatSerializer.a(ChatColor.translateAlternateColorCodes("&".charAt(0), m.substring(0, m.length() - 1) + ",{\"text\":\" \",\"color\":\"gold\"}]"));
 
-						plugin.getLogger().info(parsedMessage.toString());
+						AutoMessage.plugin.getLogger().info(parsedMessage.toString());
 						PacketPlayOutChat msg = new PacketPlayOutChat(ChatSerializer.a(parsedMessage.toString()));
 						((CraftPlayer) to).getHandle().playerConnection.sendPacket(msg);
 					} catch (Exception ignore) {
