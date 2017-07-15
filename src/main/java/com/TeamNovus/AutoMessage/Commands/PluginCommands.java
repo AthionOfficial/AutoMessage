@@ -19,12 +19,6 @@ import com.TeamNovus.AutoMessage.Util.Updater.UpdateResult;
 import com.TeamNovus.AutoMessage.Util.Updater.UpdateType;
 
 public class PluginCommands {
-
-	private AutoMessage plugin;
-	
-	public PluginCommands(AutoMessage plugin){
-		this.plugin = plugin;
-	}
 	
 	@BaseCommand(aliases = "reload", desc = "Reload the configuration from the disk.", usage = "", permission = Permission.COMMAND_RELOAD)
 	public void onReloadCmd(CommandSender sender, Command cmd, String commandLabel, String[] args) {
