@@ -153,6 +153,7 @@ public class MessageList {
 						AutoMessage.plugin.getLogger().info(msge);
 
 						PacketPlayOutChat msg = new PacketPlayOutChat(ChatSerializer.a(msge));
+						AutoMessage.plugin.getLogger().info(msg.toString());
 						((CraftPlayer) ((Player) to)).getHandle().playerConnection.sendPacket(msg);
 					} catch (Exception ignore) {
 						ignore.printStackTrace();
