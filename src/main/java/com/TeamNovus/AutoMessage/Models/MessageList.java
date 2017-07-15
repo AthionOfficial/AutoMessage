@@ -146,62 +146,13 @@ public class MessageList {
 			for (int i = 0; i < messages.size(); i++) {
 				String m = messages.get(i);
 
-				if (to instanceof Player) {
-					if (m.contains("{NAME}"))
-						m = m.replace("{NAME}", ((Player) to).getName());
-					if (m.contains("{DISPLAY_NAME}"))
-						m = m.replace("{DISPLAY_NAME}", ((Player) to).getDisplayName());
-					if (m.contains("{WORLD}"))
-						m = m.replace("{WORLD}", ((Player) to).getWorld().getName());
-					if (m.contains("{BIOME}"))
-						m = m.replace("{BIOME}", ((Player) to).getLocation().getBlock().getBiome().toString());
-				} else if (to instanceof ConsoleCommandSender) {
-					if (m.contains("{NAME}"))
-						m = m.replace("{NAME}", to.getName());
-					if (m.contains("{DISPLAY_NAME}"))
-						m = m.replace("{DISPLAY_NAME}", to.getName());
-					if (m.contains("{WORLD}"))
-						m = m.replace("{WORLD}", "UNKNOWN");
-					if (m.contains("{BIOME}"))
-						m = m.replace("{BIOME}", "UNKNOWN");
-				}
-
-				if (m.contains("{ONLINE}"))
-					m = m.replace("{ONLINE}", Bukkit.getServer().getOnlinePlayers().size() + "");
-				if (m.contains("{MAX_ONLINE}"))
-					m = m.replace("{MAX_ONLINE}", Bukkit.getServer().getMaxPlayers() + "");
-				if (m.contains("{UNIQUE_PLAYERS}"))
-					m = m.replace("{UNIQUE_PLAYERS}", Bukkit.getServer().getOfflinePlayers().length + "");
-
-				if (m.contains("{YEAR}"))
-					m = m.replace("{YEAR}", Calendar.getInstance().get(Calendar.YEAR) + "");
-				if (m.contains("{MONTH}"))
-					m = m.replace("{MONTH}", Calendar.getInstance().get(Calendar.MONTH) + "");
-				if (m.contains("{WEEK_OF_MONTH}"))
-					m = m.replace("{WEEK_OF_MONTH}", Calendar.getInstance().get(Calendar.WEEK_OF_MONTH) + "");
-				if (m.contains("{WEEK_OF_YEAR}"))
-					m = m.replace("{WEEK_OF_YEAR}", Calendar.getInstance().get(Calendar.WEEK_OF_YEAR) + "");
-				if (m.contains("{DAY_OF_WEEK}"))
-					m = m.replace("{DAY_OF_WEEK}", Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + "");
-				if (m.contains("{DAY_OF_MONTH}"))
-					m = m.replace("{DAY_OF_MONTH}", Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "");
-				if (m.contains("{DAY_OF_YEAR}"))
-					m = m.replace("{DAY_OF_YEAR}", Calendar.getInstance().get(Calendar.DAY_OF_YEAR) + "");
-				if (m.contains("{HOUR}"))
-					m = m.replace("{HOUR}", Calendar.getInstance().get(Calendar.HOUR) + "");
-				if (m.contains("{HOUR_OF_DAY}"))
-					m = m.replace("{HOUR_OF_DAY}", Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "");
-				if (m.contains("{MINUTE}"))
-					m = m.replace("{MINUTE}", Calendar.getInstance().get(Calendar.MINUTE) + "");
-				if (m.contains("{SECOND}"))
-					m = m.replace("{SECOND}", Calendar.getInstance().get(Calendar.SECOND) + "");
-
 				if (message.isJsonMessage(i) && to instanceof Player) {
 
 					try {
-						Object parsedMessage = IChatBaseComponent.ChatSerializer.a(ChatColor.translateAlternateColorCodes("&".charAt(0), m.substring(0, m.length() - 1) + ",{\"text\":\" \",\"color\":\"gold\"}]"));
+						String msge = ChatColor.translateAlternateColorCodes("&".charAt(0), m.substring(0, m.length() - 1) + ",{\"text\":\" \",\"color\":\"gold\"}]");
+						AutoMessage.plugin.getLogger().info(msge);
+						Object parsedMessage = IChatBaseComponent.ChatSerializer.a(msge);
 
-						AutoMessage.plugin.getLogger().info(parsedMessage.toString());
 						PacketPlayOutChat msg = new PacketPlayOutChat(ChatSerializer.a(parsedMessage.toString()));
 						((CraftPlayer) to).getHandle().playerConnection.sendPacket(msg);
 					} catch (Exception ignore) {
