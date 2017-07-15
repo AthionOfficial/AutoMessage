@@ -149,7 +149,7 @@ public class MessageList {
 				if (message.isJsonMessage(i) && to instanceof Player) {
 
 					try {
-						String msge = colourCodeToJson(m.substring(0, m.length() - 1) + ",{\"text\":\" \",\"color\":\"gold\"}]");
+						String msge = colourCodeToJson("[{\"text\":\"\"}," + m + ",{\"text\":\" \",\"color\":\"gold\"}]");
 						AutoMessage.plugin.getLogger().info(msge);
 
 						PacketPlayOutChat msg = new PacketPlayOutChat(ChatSerializer.a(msge));
@@ -158,8 +158,6 @@ public class MessageList {
 					} catch (Exception ignore) {
 						ignore.printStackTrace();
 					}
-				} else {
-					to.sendMessage(ChatColor.translateAlternateColorCodes("&".charAt(0), m));
 				}
 			}
 
