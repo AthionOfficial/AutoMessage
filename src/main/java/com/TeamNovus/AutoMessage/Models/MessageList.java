@@ -149,7 +149,7 @@ public class MessageList {
 				if (message.isJsonMessage(i) && to instanceof Player) {
 
 					try {
-						String msge = ChatColor.translateAlternateColorCodes("&".charAt(0), m.substring(0, m.length() - 1) + ",{\"text\":\" \",\"color\":\"gold\"}]");
+						String msge = colourCodeToJson(m.substring(0, m.length() - 1) + ",{\"text\":\" \",\"color\":\"gold\"}]");
 						AutoMessage.plugin.getLogger().info(msge);
 						Object parsedMessage = IChatBaseComponent.ChatSerializer.a(msge);
 
@@ -167,5 +167,31 @@ public class MessageList {
 				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replaceFirst("/", ""));
 			}
 		}
+	}
+	
+	public static String colourCodeToJson(String msg) {
+		return msg
+				.replace("&0", "\"},{\"color\":\"black\",\"text\":\"")
+				.replace("&1", "\"},{\"color\":\"dark_blue\",\"text\":\"")
+				.replace("&2", "\"},{\"color\":\"dark_green\",\"text\":\"")
+				.replace("&3", "\"},{\"color\":\"dark_aqua\",\"text\":\"")
+				.replace("&4", "\"},{\"color\":\"dark_red\",\"text\":\"")
+				.replace("&5", "\"},{\"color\":\"dark_purple\",\"text\":\"")
+				.replace("&6", "\"},{\"color\":\"gold\",\"text\":\"")
+				.replace("&7", "\"},{\"color\":\"gray\",\"text\":\"")
+				.replace("&8", "\"},{\"color\":\"dark_gray\",\"text\":\"")
+				.replace("&9", "\"},{\"color\":\"blue\",\"text\":\"")
+				.replace("&a", "\"},{\"color\":\"green\",\"text\":\"")
+				.replace("&b", "\"},{\"color\":\"aqua\",\"text\":\"")
+				.replace("&c", "\"},{\"color\":\"red\",\"text\":\"")
+				.replace("&d", "\"},{\"color\":\"light_purple\",\"text\":\"")
+				.replace("&e", "\"},{\"color\":\"yellow\",\"text\":\"")
+				.replace("&f", "\"},{\"color\":\"white\",\"text\":\"")
+				.replace("&k", "\"},{\"obfuscated\":true,\"text\":\"")
+				.replace("&l", "\"},{\"bold\":true,\"text\":\"")
+				.replace("&m", "\"},{\"strikethrough\":true,\"text\":\"")
+				.replace("&n", "\"},{\"underlined\":true,\"text\":\"")
+				.replace("&o", "\"},{\"italic\":true,\"text\":\"")
+				.replace("\"text\":\"\"},{", "");
 	}
 }
